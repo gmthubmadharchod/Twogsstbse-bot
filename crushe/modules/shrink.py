@@ -1,5 +1,5 @@
 from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, message
 import random
 import requests
 import string
@@ -50,28 +50,42 @@ async def is_user_verified(user_id):
 
 @app.on_message(filters.command("start"))
 async def token_handler(client, message):
-    """Handle the /token command."""
+    """Handle the /start command."""
     join = await subscribe(client, message)
     if join == 1:
         return
-    user_id = message.chat.id
+
+    user = message.from_user
+    user_mention = f"[{user.first_name}](tg://user?id={user.id})"
+
+    # Random image selection
+    images = [
+        "https://ar-hosting.pages.dev/1752942103938.jpg",
+        "https://ar-hosting.pages.dev/1752942111453.jpg",
+        "https://ar-hosting.pages.dev/1752942103004.jpg",
+        "https://ar-hosting.pages.dev/1752942106446.jpg",
+        "https://ar-hosting.pages.dev/1752942105659.jpg",
+        "https://ar-hosting.pages.dev/1752942104883.jpg",
+        "https://ar-hosting.pages.dev/1752942110594.jpg",
+        "https://ar-hosting.pages.dev/1752942113175.jpg",
+        "https://ar-hosting.pages.dev/1752942112328.jpg",
+    ]
+    image_url = random.choice(images)
+
+    join_button = InlineKeyboardButton("Join Channel", url="https://t.me/Team_Sonu1")
+    premium = InlineKeyboardButton("Get Premium", url="https://t.me/sonuporsa")
+    keyboard = InlineKeyboardMarkup([
+        [join_button],
+        [premium]
+    ])
+
     if len(message.command) <= 1:
-        image_url = "static/crushe.jpg"
-        join_button = InlineKeyboardButton("Join Channel", url="https://t.me/Team_Sonu1")
-        premium = InlineKeyboardButton("Get Premium", url="https://t.me/SonuPorsa")  # Callback for Help button
-        keyboard = InlineKeyboardMarkup([
-            [join_button],  # First button
-            [premium]   # Second button
-        ])
-        # Send the message with the image and keyboard
         await message.reply_photo(
             photo=image_url,
             caption=(
-                "Hi 👋 Welcome, Wanna intro...?\n\n"
-                "✳️ I can save posts from channels or groups where forwarding is off. I can download videos/audio from YT, INSTA, ... social platforms\n"
-                "✳️ Simply send the post link of a public channel. For private channels, do /login. Send /help to know more. \n\n"
-                "> Must check /terms, /plan & /help\n\n"
-                "> 👉 **__Note:__** Initiate /set to auto setup bot commands (owner only)"
+                f"Hi 👋 {user_mention}, welcome!\n\n"
+                "✳️ I can save posts from channels or groups where forwarding is off.\n"
+                "✳️ Simply send the post link of a public channel. For private channels, do /login. Send /help to know more."
             ),
             reply_markup=keyboard
         )
