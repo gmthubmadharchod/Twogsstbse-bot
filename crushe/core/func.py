@@ -36,13 +36,13 @@ async def subscribe(app, message):
       try:
          user = await app.get_chat_member(update_channel, message.from_user.id)
          if user.status == "kicked":
-            await message.reply_text("You are Banned. Contact -- @She_who_remain")
+            await message.reply_text("You are Banned. Contact -- @Sonuporsa")
             return 1
       except UserNotParticipant:
          await message.reply_photo(photo="static/crushe.jpg",caption=script.FORCE_MSG.format(message.from_user.mention), reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Join Now...", url=f"{url}")]]))
          return 1
       except Exception:
-         await message.reply_text("Something Went Wrong. Contact us @She_who_remain...")
+         await message.reply_text("Something Went Wrong. Contact us @Sonuporsa...")
          return 1
 
 
@@ -273,13 +273,13 @@ async def progress_callback(current, total, progress_message):
     # Format message with MB and percentage
     await progress_message.edit(
         f"╭──────────────────╮\n"
-        f"│        **__Uploading by Crushe...__**       \n"
+        f"│        **__Uploading...__**       \n"
         f"├──────────\n"
         f"│ {progress_bar}\n\n"
         f"│ **__Progress:__** {percent:.2f}%\n"
         f"│ **__Uploaded:__** {current_mb:.2f} MB / {total_mb:.2f} MB\n"
         f"╰──────────────────╯\n\n"
-        f"**__Powered by Crushe__**"
+        f"**__Powered by Team_Sonu__**"
     )
 
 async def prog_bar(current, total, ud_type, message, start):
