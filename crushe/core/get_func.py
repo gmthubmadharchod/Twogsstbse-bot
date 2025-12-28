@@ -96,7 +96,7 @@ async def get_msg(userbot, sender, edit_id, msg_link, i, message):
         else:
             chat = msg_link.split("/")[-2]
         if chat in saved_channel_ids:
-            await app.edit_message_text(message.chat.id, edit_id, "Sorry! dude 😎 This channel is protected 🔐 by **__Crushe__**")
+            await app.edit_message_text(message.chat.id, edit_id, "Sorry! dude 😎 This channel is protected 🔐 by **_Owner_**")
             return
         file = ""
         try:
@@ -161,7 +161,7 @@ async def get_msg(userbot, sender, edit_id, msg_link, i, message):
             file = await userbot.download_media(
                 msg,
                 progress=progress_bar,
-                progress_args=("╭─────────────────────╮\n│      **__Downloading by Crushe__...**\n├─────────────────────", edit, time.time()))
+                progress_args=("╭─────────────────────╮\n│      **__Downloading__...**\n├─────────────────────", edit, time.time()))
             # --- Updated File-Renaming Block ---
             custom_rename_tag = get_user_rename_preference(chatx)
             # Detect if the media is truly a video
@@ -244,7 +244,7 @@ async def get_msg(userbot, sender, edit_id, msg_link, i, message):
                             document=chunk,
                             caption=chunk_caption,
                             progress=progress_bar,
-                            progress_args=('**Uploading by Crushe...**', progress_status, time.time())
+                            progress_args=('**Uploading...**', progress_status, time.time())
                         )
                         if msg.pinned_message:
                             try:
@@ -306,7 +306,7 @@ async def get_msg(userbot, sender, edit_id, msg_link, i, message):
                             duration=duration,
                             thumb=thumb_path,
                             progress=progress_bar,
-                            progress_args=("╭─────────────────────╮\n│      **__Crushe Uploader__**\n├─────────────────────", edit, time.time())
+                            progress_args=("╭─────────────────────╮\n│      **__Uploader__**\n├─────────────────────", edit, time.time())
                         )
                         await message_sent.copy(LOG_GROUP)
                         await edit.delete()
@@ -316,7 +316,7 @@ async def get_msg(userbot, sender, edit_id, msg_link, i, message):
                         return
                     elif upload_method == "Telethon":
                         await edit.delete()
-                        progress_message = await gf.send_message(sender, "__**Uploading by crushe ...**__")
+                        progress_message = await gf.send_message(sender, "__**Uploading...**__")
                         uploaded = await fast_upload(
                             gf,
                             file,
@@ -366,12 +366,12 @@ async def get_msg(userbot, sender, edit_id, msg_link, i, message):
                             thumb=thumb_path,
                             duration=duration,
                             progress=progress_bar,
-                            progress_args=("╭─────────────────────╮\n│      **__Crushe Uploader__**\n├─────────────────────", edit, time.time())
+                            progress_args=("╭─────────────────────╮\n│      **__Uploader__**\n├─────────────────────", edit, time.time())
                         )
                         await message_sent.copy(LOG_GROUP)
                     elif upload_method == "Telethon":
                         await edit.delete()
-                        progress_message = await gf.send_message(sender, "**__Starting Upload by Crushe__**")
+                        progress_message = await gf.send_message(sender, "**__Uploading Started__**")
                         uploaded = await fast_upload(
                             gf,
                             file,
@@ -401,7 +401,7 @@ async def get_msg(userbot, sender, edit_id, msg_link, i, message):
                     try:
                         await app.edit_message_text(sender, edit_id, "The bot is not an admin in the specified chat.")
                     except Exception:
-                        await progress_message.edit("Something Greate happened my jaan")
+                        await progress_message.edit("Achhi baat hai")
             elif msg.media == MessageMediaType.PHOTO:
                 await edit.edit("**Uploading photo...")
                 delete_words = load_delete_words(sender)
@@ -449,12 +449,12 @@ async def get_msg(userbot, sender, edit_id, msg_link, i, message):
                                 duration=duration,
                                 thumb=thumb_path,
                                 progress=progress_bar,
-                                progress_args=("╭─────────────────────╮\n│      **__Crushe Uploader__**\n├─────────────────────", edit, time.time())
+                                progress_args=("╭─────────────────────╮\n│      **__Uploader__**\n├─────────────────────", edit, time.time())
                             )
                             await message_sent.copy(LOG_GROUP)
                         elif upload_method == "Telethon":
                             await edit.delete()
-                            progress_message = await gf.send_message(sender, "**__Starting Upload by Crushe__**")
+                            progress_message = await gf.send_message(sender, "**__Uploading Started__**")
                             uploaded = await fast_upload(
                                 gf,
                                 file,
@@ -484,12 +484,12 @@ async def get_msg(userbot, sender, edit_id, msg_link, i, message):
                                 caption=caption,
                                 thumb=thumb_path,
                                 progress=progress_bar,
-                                progress_args=("╭─────────────────────╮\n│      **__Crushe Uploader__**\n├─────────────────────", edit, time.time())
+                                progress_args=("╭─────────────────────╮\n│      **__Uploader__**\n├─────────────────────", edit, time.time())
                             )
                             await message_sent.copy(LOG_GROUP)
                         elif upload_method == "Telethon":
                             await edit.delete()
-                            progress_message = await gf.send_message(sender, "Uploading by Crushe...")
+                            progress_message = await gf.send_message(sender, "Uploading...")
                             uploaded = await fast_upload(
                                 gf,
                                 file,
@@ -506,7 +506,7 @@ async def get_msg(userbot, sender, edit_id, msg_link, i, message):
                     try:
                         await app.edit_message_text(sender, edit_id, "The bot is not an admin in the specified chat.")
                     except Exception:
-                        await progress_message.edit("Something Greate happened my jaan")
+                        await progress_message.edit("Achhi baat Hai")
             await edit.delete()
             if progress_message:
                 await progress_message.delete()
@@ -518,7 +518,7 @@ async def get_msg(userbot, sender, edit_id, msg_link, i, message):
             print(f"Errrrror {e}")
             await edit.delete()
     else:
-        edit = await app.edit_message_text(sender, edit_id, "Cloning by Crushe...")
+        edit = await app.edit_message_text(sender, edit_id, "Cloning...")
         try:
             chat = msg_link.split("/")[-2]
             await copy_message_with_chat_id(app, sender, chat, msg_id)
@@ -637,7 +637,7 @@ async def settings_command(event):
         [Button.inline("Session Login", b'addsession'), Button.inline("Logout", b'logout')],
         [Button.inline("Set Thumbnail", b'setthumb'), Button.inline("Remove Thumbnail", b'remthumb')],
         [Button.inline("Upload Method", b'uploadmethod')],
-        [Button.url("Report Errors", "https://t.me/She_who_remain")]
+        [Button.url("Report Errors", "https://t.me/Sonuporsa")]
     ]
     await gf.send_file(event.chat_id, file=SET_PIC, caption=MESS, buttons=buttons)
 
@@ -681,15 +681,15 @@ async def callback_query_handler(event):
         telethon_check = " ✅" if current_method == "Telethon" else ""
         buttons = [
             [Button.inline(f"Pyrogram v2{pyrogram_check}", b'pyrogram')],
-            [Button.inline(f"Crushe v1 ⚡{telethon_check}", b'telethon')]
+            [Button.inline(f"Telethone ⚡{telethon_check}", b'telethon')]
         ]
-        await event.edit("Choose your preferred upload method:\n\n__**Note:** **Crushe ⚡**, built on Telethon(base), still in beta.__", buttons=buttons)
+        await event.edit("Choose your preferred upload method:\n\n__**Note:** **Telethone**, built on Telethon(base), still in beta.__", buttons=buttons)
     elif event.data == b'pyrogram':
         save_user_upload_method(user_id, "Pyrogram")
         await event.edit("Upload method set to **Pyrogram** ✅")
     elif event.data == b'telethon':
         save_user_upload_method(user_id, "Telethon")
-        await event.edit("Upload method set to **Crushe ⚡\n\nThanks for choosing this library as it will help me to analyze the error raise issues on github.** ✅")
+        await event.edit("Upload method set to **Telethone⚡\n\nUpload Method set to Telethone.** ✅")
     elif event.data == b'reset':
         try:
             user_id_str = str(user_id)
@@ -824,7 +824,7 @@ def progress_callback(done, total, user_id):
         remaining_time = 0
     remaining_time_min = remaining_time / 60
     final = (f"╭──────────────────╮\n"
-             f"│     **__Crushe ⚡ Uploader__**       \n"
+             f"│     **__⚡ Uploader__**       \n"
              f"├──────────\n"
              f"│ {progress_bar_str}\n\n"
              f"│ **__Progress:__** {percent:.2f}%\n"
@@ -832,7 +832,7 @@ def progress_callback(done, total, user_id):
              f"│ **__Speed:__** {speed_mbps:.2f} Mbps\n"
              f"│ **__ETA:__** {remaining_time_min:.2f} min\n"
              f"╰──────────────────╯\n\n"
-             f"**__Powered by Crushe__**")
+             f"**__Powered by Team_Sonu__**")
     user_data['previous_done'] = done
     user_data['previous_time'] = time.time()
     return final
