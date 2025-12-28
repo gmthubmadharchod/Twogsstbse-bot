@@ -172,42 +172,68 @@ async def terms(client, message):
     await message.reply_text(terms_text, reply_markup=buttons)
 
 
+# /plan command
 @app.on_message(filters.command("plan") & filters.private)
 async def plan(client, message):
     plan_text = (
-        "💰 **Premium Price**: Starting from $2 or 200 INR accepted via **__Amazon Gift Card__** (terms and conditions apply).\n"
-        "📥 **Download Limit**: Users can download up to 100,000 files in a single batch command.\n"
-        "🛑 **Batch**: You will get two modes /bulk and /batch.\n"
-        "   - Users are advised to wait for the process to automatically cancel before proceeding with any downloads or uploads.\n\n"
-        "📜 **Terms and Conditions**: For further details and complete terms and conditions, please send /terms.\n"
+        "💎 **Upgrade to Premium Plan** 💎\n\n"
+        "🚀 **Premium Features**\n"
+        "✅ No need to verify every 3 hours ⏳\n"
+        "✅ Bulk mode: Upload up to **500 files** 📂\n"
+        "✅ Priority Admin Support\n"
+        "✅ Unlimited Leeches\n\n"
+        "👇 Tap below to see full details:"
     )
-    # Buttons for "See Terms" and "Contact"
+
     buttons = InlineKeyboardMarkup(
         [
-            [InlineKeyboardButton("📜 See Terms", callback_data="see_terms")],
-            [InlineKeyboardButton("💬 Contact Now", url="https://t.me/She_who_remain")],
+            [InlineKeyboardButton("🔸 Buy Premium", callback_data="see_plan")]
         ]
     )
+
     await message.reply_text(plan_text, reply_markup=buttons)
 
 
+# Callback: Buy Premium (Medium Plan)
 @app.on_callback_query(filters.regex("see_plan"))
-async def see_plan(client, callback_query):
-    plan_text = (
-        "💰 **Premium Price**: Starting from $2 or 200 INR accepted via **__Amazon Gift Card__** (terms and conditions apply).\n"
-        "📥 **Download Limit**: Users can download up to 100,000 files in a single batch command.\n"
-        "🛑 **Batch**: You will get two modes /bulk and /batch.\n"
-        "   - Users are advised to wait for the process to automatically cancel before proceeding with any downloads or uploads.\n\n"
-        "📜 **Terms and Conditions**: For further details and complete terms and conditions, please send /terms or click See Terms👇\n"
+async def buy_premium_plan(client, callback_query):
+    text = (
+        "💎 **Upgrade to Premium** 💎\n\n"
+        "🚀 **Exclusive Premium Features**\n"
+        "✅ No need to verify every 3 hours ⏳\n"
+        "✅ Bulk mode: Upload up to **500 files** 📂\n"
+        "✅ Priority Admin Support\n"
+        "✅ Unlimited Leeches\n\n"
+
+        "🪙 **10-Day Plan**\n"
+        "💰 Rs 50 🇮🇳 / **$0.60 USDT**\n\n"
+        "🪙 **20-Day Plan**\n"
+        "💰 Rs 100 🇮🇳 / **$1.20 USDT**\n\n"
+        "🪙 **Monthly Plan**\n"
+        "💰 Rs 130 🇮🇳 / **$1.56 USDT**\n\n"
+
+        "📌 **Payment Methods**:\n"
+        "🧾 QR Code: https://ar-hosting.pages.dev/1753559081448.jpg\n"
+        "🌍 International payment: Contact Admin\n\n"
+
+        "📤 **After Payment**:\n"
+        "1️⃣ Send payment screenshot 👇\n"
+        "2️⃣ Contact Admin to activate Premium 🤝\n\n"
+        "💌 We're here for you! 💕"
     )
-    # Buttons for "See Terms" and "Contact"
+
     buttons = InlineKeyboardMarkup(
         [
-            [InlineKeyboardButton("📜 See Terms", callback_data="see_terms")],
-            [InlineKeyboardButton("💬 Contact Now", url="https://t.me/She_who_remain")],
+            [InlineKeyboardButton("🧾 Get QR Code", url="https://ar-hosting.pages.dev/1753559081448.jpg")],
+            [InlineKeyboardButton("💬 Contact Admin", url="https://t.me/sonuporsa")]
         ]
     )
-    await callback_query.message.edit_text(plan_text, reply_markup=buttons)
+
+    await callback_query.message.edit_text(
+        text,
+        reply_markup=buttons,
+        disable_web_page_preview=True
+    )
 
 
 @app.on_callback_query(filters.regex("see_terms"))
